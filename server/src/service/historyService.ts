@@ -1,9 +1,15 @@
-import { readFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
+
 // TODO: Define a City class with name and id properties
 class City {
   id: string;
   name: string;
+
+  constructor(id: string, name: string) {
+    this.id = id;
+    this.name = name;
+  }
 }
 // TODO: Complete the HistoryService class
 class HistoryService {
@@ -35,11 +41,6 @@ class HistoryService {
       throw err;
     }
   }
-
-  private async write(cities: City[]): Promise<void> {
-    const data = JSON.stringify(cities, null, 2);
-    await writeFile(this.filePath, data, 'utf8');
-  }
   // TODO: Define a getCities method that reads the cities from the searchHistory.json file and returns them as an array of City objects
   async getCities(): Promise<City[]> {
     const cities = await this.read();
@@ -61,21 +62,29 @@ class HistoryService {
     // Write the updated array back to the file
     await this.write(cities);
 
-    // Return the newly added city (optional, but can be useful)
     return newCity;
   }
-  // * BONUS TODO: Define a removeCity method that removes a city from the searchHistory.json file
-    async removeCity(id: string) {
-      const cities = await this.read();
-
-      const index = cities.findIndex(city => city.id === id);
-
-      const [removedCity] = cities.splice(index, 1);
-
-      await this.write(cities);
-
-      return removedCity;
+  public async removeCity(id: string): Promise<City | null> {
+    // 1. Read existing cities
+    const cities = await this.read();
+  
+    // 2. Locate the city by its ID
+    const index = cities.findIndex(city => city.id === id);
+  
+    // 3. If not found, return null (or throw an error, up to you)
+    if (index === -1) {
+      return null;
     }
+  
+    // 4. Remove the city from the array
+    const [removedCity] = cities.splice(index, 1);
+  
+    // 5. Write the updated array to searchHistory.json
+    await this.write(cities);
+  
+    // 6. Return the removed city, if needed
+    return removedCity;
+  }
 }
 
-export default new HistoryService();
+export default HistoryService;
