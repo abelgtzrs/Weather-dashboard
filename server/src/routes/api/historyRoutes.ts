@@ -1,10 +1,10 @@
 import express from 'express';
-import HistoryService from '../../service/historyService';
+import HistoryService from '../../service/historyService.js';
 
 
 
 const historyRouter = express.Router();
-const historyService = new HistoryService();
+const historyService = HistoryService;
 
 historyRouter.get('/', async (_req, res) => {
   try {

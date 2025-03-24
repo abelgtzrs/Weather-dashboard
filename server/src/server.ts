@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import path from 'path';
-import htmlRoutes from './routes/htmlRoutes.js'; // or .ts
+import htmlRoutes from './routes/htmlRoutes.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 dotenv.config();
 
@@ -12,8 +13,11 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 // TODO: Serve static files of entire client dist folder
-app.use(express.static(path.join(__dirname, "../../client/dist"))); //TElls server to send frontend files from the client/dist folder
+app.use(express.static(join(__dirname, '../../client/dist'))); //TElls server to send frontend files from the client/dist folder
 // TODO: Implement middleware for parsing JSON and urlencoded form data
 app.use(express.json()); //Allows the server to understand JSON format
 app.use(express.urlencoded({ extended:true })); //Allows server to understand form data
