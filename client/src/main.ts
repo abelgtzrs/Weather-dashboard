@@ -43,6 +43,8 @@ const fetchWeather = async (cityName: string) => {
     body: JSON.stringify({ city: cityName }),
   });
 
+  console.log('📥 Response object:', response);
+
   const weatherData = await response.json();
 
   console.log('weatherData: ', weatherData);
@@ -288,4 +290,4 @@ const getAndRenderHistory = () =>
 searchForm?.addEventListener('submit', handleSearchFormSubmit);
 searchHistoryContainer?.addEventListener('click', handleSearchHistoryClick);
 
-getAndRenderHistory();
+//getAndRenderHistory();

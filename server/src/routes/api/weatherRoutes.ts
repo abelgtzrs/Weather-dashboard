@@ -1,49 +1,31 @@
 import { Router, type Request, type Response } from 'express';
-const router = Router();
-
-// import HistoryService from '../../service/historyService.js';
 import historyService from '../../service/historyService.js';
+import weatherService from '../../service/weatherService.js';
 
-// import WeatherService from '../../service/weatherService.js';
-//import weatherService from '../../service/weatherService.js';
+const router = Router();
 
 // TODO: POST Request with city name to retrieve weather data
 router.post('/', async (req: Request, res: Response) => {
+  const { city } = req.body;
+
+  if (!city) {
+    return res.status(400).json({ error: 'City name is required.' });
+  }
+
   try {
-    console.log('🔥 POST /api/weather hit');
-    console.log('📥 Body:', req.body);
+    // Get weather data from OpenWeather via our service
+    const weatherData = await weatherService.getWeatherForCity(city);
 
-    const { city } = req.body;
+    // Save city to our search history
+    await historyService.addCity(city);
 
-    if (!city) {
-      console.log('❌ No city provided in request body');
-      return res.status(400).json({ error: 'City name is required.' });
-    }
-
-    console.log('✅ City received:', city);
-
-    const dummyWeather = [
-      {
-        date: "Today",
-        icon: "01d",
-        description: "clear",
-        temperature: 70,
-        windSpeed: 5,
-        humidity: 50
-      }
-    ];
-
-    console.log('📤 Sending mock weather data');
-    return res.json(dummyWeather);
-
+    // Send weather array (first index is current, rest is forecast)
+    return res.json(weatherData);
   } catch (error) {
-    console.error('💥 Error in POST /api/weather:', error);
-    return res.status(500).json({ error: 'Server error in POST /api/weather' });
+    console.error('Error fetching weather:', error);
+    return res.status(500).json({ error: 'Failed to fetch weather data.' });
   }
 });
-
-
-
 
 // TODO: GET search history
 router.get('/history', async (_req: Request, res: Response) => {

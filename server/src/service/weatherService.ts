@@ -39,7 +39,7 @@ class WeatherService {
     const url = this.buildGeocodeQuery();
     const response = await fetch(url);
     const data = await response.json();
-    console.log('🌐 Geolocation response:', data); //TEST
+    console.log('Geolocation response:', data); //TEST
     return data;
   }
   // TODO: Create destructureLocationData method
@@ -109,17 +109,17 @@ class WeatherService {
       this.city = city;
   
       const coordinates = await this.fetchAndDestructureLocationData();
-      console.log("📌 Coordinates:", coordinates);
+      console.log("Coordinates:", coordinates);
   
       const weatherData = await this.fetchWeatherData(coordinates);
-      console.log("💥 OpenWeather response:", weatherData);
+      console.log("OpenWeather response:", weatherData);
   
       const current = this.parseCurrentWeather(weatherData);
       const forecast = this.buildForecastArray(current, weatherData.list);
   
       return [current, ...forecast];
     } catch (error) {
-      console.error("❌ Error in getWeatherForCity:", error);
+      console.error("Error in getWeatherForCity:", error);
       throw error; // rethrow so weatherRoutes can catch
     }
   }
