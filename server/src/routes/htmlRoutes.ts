@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 // Serves the React build
 router.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 export default router;

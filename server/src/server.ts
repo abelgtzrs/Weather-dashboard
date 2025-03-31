@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3001;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+console.log('🔍 Serving static files from:', join(__dirname, '../client/dist'));
 
 // 1. MIDDLEWARE FOR PARSING
 app.use(express.json());
