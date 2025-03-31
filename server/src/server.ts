@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 2. Serve static files
-app.use(express.static(join(__dirname, '../../client/dist')));
+app.use(express.static(join(__dirname, '../client/dist')));
+
 
 // 3. Then mount the weatherRoutes
 app.use('/api/weather', weatherRoutes);
