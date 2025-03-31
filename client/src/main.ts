@@ -290,4 +290,4 @@ const getAndRenderHistory = () =>
 searchForm?.addEventListener('submit', handleSearchFormSubmit);
 searchHistoryContainer?.addEventListener('click', handleSearchHistoryClick);
 
-//getAndRenderHistory();
+getAndRenderHistory();
