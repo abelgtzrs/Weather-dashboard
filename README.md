@@ -68,10 +68,6 @@ npm run dev
 
 ![Deployed Screenshot](https://i.imgur.com/k0bGHpF.png)
 
-## Deployed Website
-
-[Click here for the deployed site on render](https://weather-dashboard-uh80.onrender.com/)
-
 ## Credits
 
 - Abel Gutierrez
@@ -84,4 +80,4 @@ This project is licensed under the MIT License.
 
 ## Deployed Link
 
-*Coming soon.*
+[Click here for the deployed site on render](https://weather-dashboard-uh80.onrender.com/)
