@@ -66,7 +66,7 @@ npm run dev
 
 ## Screenshots
 
-(https://i.imgur.com/k0bGHpF.png)
+![Deployed Screenshot](https://i.imgur.com/k0bGHpF.png)
 
 ## Credits
 
